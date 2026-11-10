@@ -8,6 +8,6 @@ int main(int argc, char** argv) {
   rclcpp::init(argc, argv);
   auto node{std::make_shared<
     robotaxi_demo::RoboTaxiNode>()};
-  //rclcpp::spin(node);
+  rclcpp::spin(node);
   rclcpp::shutdown();
 }
