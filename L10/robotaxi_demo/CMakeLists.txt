@@ -11,8 +11,8 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
 include_directories(include)
-add_executable(robotaxi_exe src/robotaxi_main.cpp)
-ament_target_dependencies(robotaxi_exe rclcpp)
+add_executable(robotaxi_exe src/robotaxi_main.cpp src/robotaxi_node.cpp)
+ament_target_dependencies(robotaxi_exe rclcpp geometry_msgs)
 install(TARGETS robotaxi_exe
   DESTINATION lib/${PROJECT_NAME})
 
