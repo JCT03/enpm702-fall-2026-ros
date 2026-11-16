@@ -8,13 +8,12 @@ namespace robotaxi_demo {
 
 class RoboTaxiNode : public rclcpp::Node {
   public:
-
     RoboTaxiNode()
         : rclcpp::Node{"robotaxi_node"},
-          publisher_{this->create_publisher<geometry_msgs::msg::Point>("robotaxi/position", 10)},
-          timer_{this->create_wall_timer(std::chrono::milliseconds{500},
-                                   std::bind(&RoboTaxiNode::publish_position, this))} {
-    }
+          publisher_{create_publisher<geometry_msgs::msg::Point>(
+              "robotaxi/position", 10)},
+          timer_{create_wall_timer(std::chrono::milliseconds{500},
+              std::bind(&RoboTaxiNode::publish_position, this))} {}
 
   private:
     void publish_position();
