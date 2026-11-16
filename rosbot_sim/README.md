@@ -10,7 +10,7 @@ package that starts it.
 | `husarion_gz_worlds/` | Gazebo worlds and models | https://github.com/husarion/panther_ros (`husarion_gz_worlds`), same copy |
 | `husarion_components_description/` | Descriptions of the sensors on the robot | https://github.com/husarion/husarion_components_description, same copy |
 
-Everything except `gp2_bringup/` is third-party code. Do not change it. All of it is
+Everything except `gp2_bringup/` is third-party code, changed only as the tables below list. Do not change it. All of it is
 Apache License 2.0 (each package keeps its `LICENSE`; `husarion_components_description` also
 keeps its `NOTICE.md`).
 
@@ -42,6 +42,7 @@ Changes inside the kept packages:
 | `rosbot_utils` | Removed the firmware files and the scripts `flash_firmware`, `flash_firmware_uart.py`, `flash_firmware_usb.py` and `utils.py`, and the dependencies `python3-argcomplete`, `python3-ftdi`, `python3-libgpiod`, `python3-pyudev`, `python3-serial`, `python3-sh`, `stm32flash` and `usbutils`. Kept: the laser filter configuration the simulation starts. `CMakeLists.txt` no longer installs the removed files. |
 | `rosbot_gazebo` | Removed the `rosbot_joy` include from `launch/spawn_robot.yaml` and the dependency `rosbot_joy`. |
 | `rosbot_controller` | Removed the dependencies `husarion_mecanum_drive_controller`, `rosbot_hardware_interfaces`, `rosbot_moveit`, `rosbot_utils` and `udev`. |
+| `rosbot_controller` (`config/rosbot/controllers.yaml`) | Set `left_wheel_radius_multiplier` and `right_wheel_radius_multiplier` of the differential drive controller from 0.95 to 1.0. Husarion's file gives 0.95 with the comment "Based on real measurements", from the real robot. The simulated wheel has exactly the radius the controller assumes (0.0425 m), so 0.95 made the odometry 5 % short: in a 3 m test with `cmd_vel`, odometry said 2.919 m while Gazebo's true travel was 3.074 m (ratio 0.950). With 1.0 the two agree (2.932 m and 2.932 m). The yaw is not affected: it comes from the IMU. |
 | `rosbot_description` | Removed the dependency `open_manipulator_description` (ROSbot XL only). |
 | `husarion_components_description` | Removed the dependencies `realsense2_description`, `robotiq_description`, `ur_description` and `zed_msgs`. The robot's `basic` configuration uses a Slamtec lidar and a Luxonis OAK camera, so `depthai_descriptions` and `nav2_common` stay. |
 
@@ -50,4 +51,4 @@ do not work from this folder. Files that only they use (for example
 `rosbot_controller/launch/manipulator.yaml`, `rosbot_description/urdf/rosbot_xl.urdf.xacro`,
 the `ur` and `kinova` files of `husarion_components_description`) were left as they are.
 
-No other file was edited. Check the changes with `git log -p -- rosbot_sim`.
+No other third-party file was edited. Check the changes with `git log -p -- rosbot_sim`.

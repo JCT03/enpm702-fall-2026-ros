@@ -57,7 +57,10 @@ meters; x points east, y points north.
 - Hall: x from -3 to 17, y from -3 to 2 (5 m wide). Two rooms lie north of it (y from 2 to 7,
   split at x = 7), reached through two doorways, each 3 m wide, in the wall y = 2.
 - Door 3 at x = 12 is closed: a red panel fills the doorway. Door 4 at x = 3 is open.
-- A crate (1.2 m by 0.8 m) stands at (9.5, -2.4), against the south wall.
+- A crate (1.2 m by 0.8 m) stands at (9.5, -2.4), against the south wall. The crate, the fire
+  extinguisher, the person and the spill have a visual and no collision shape: the robot drives
+  through them and cannot get stuck on one. The lidar and the logical camera still see them. The
+  walls and the closed door have collision shapes.
 - Blue discs on the floor mark the four checkpoints: (5.0, -0.5), (9.5, -1.4), (12.0, 0.4)
   and (3.0, 0.4). The start (0, 0) and every checkpoint are at least 1.5 m from every wall.
 - Objects for the logical camera (each is a Gazebo model with its own name; the number is the
@@ -101,14 +104,14 @@ the camera frame**. To get a position in `odom`, transform it with tf2. Know the
 - Nothing hides anything: the camera sees through walls and behind the crate.
 - A model counts when its **origin** is inside the volume (a test: a crate whose center was
   3.58 m ahead was not listed, although its front face was 3.18 m ahead).
-- The ROSbot's `odom` frame is 5 % short, so a position in `odom` is off by about 5 % of the
-  distance driven (see "Topics and frames"). The model poses in the camera frame are exact.
+- In `odom`, the robot's pose matches the world (see "Topics and frames"), so a position
+  you compute in `odom` is the position in the world (within 0.015 m for the objects in the
+  GP2 reference runs). The model poses in the camera frame are exact.
 
 How it is attached, without a change to the Husarion packages: `models/logical_camera_rig.sdf` is a
 small model with the sensor and a `DetachableJoint` plugin. The launch file spawns it at the
 robot's start pose, and the plugin joins its link to the robot's `base_link` with a fixed
-joint. The rig has no collision shape and a mass of 0.05 kg. It also holds a yellow disc on the
-floor under the robot (visual only), so that the robot shows in the video. The launch file
+joint. The rig has no collision shape and a mass of 0.05 kg. The launch file
 publishes the static transform `base_link` to `logical_camera_link` and bridges the topic with
 `ros_gz_bridge`.
 
@@ -153,11 +156,11 @@ and 0.131 m above `base_link`. `base_link` has x forward, y left. **The lidar fr
 about z**, so the direction straight ahead of the robot is at angle +pi (and -pi) in the
 scan, not 0. Check with `ros2 run tf2_ros tf2_echo base_link laser`.
 
-`odom` is not exact. In `patrol.sdf` the pose in `odom` falls short of the true travel by
-about 5 %: after 6 m of driving, `odom` said x = 5.96 while Gazebo's true position was
-6.28. The cause is in `rosbot_controller/config/rosbot/controllers.yaml`:
-`left_wheel_radius_multiplier` and `right_wheel_radius_multiplier` are 0.95 ("Based on real
-measurements"), and the simulated wheels have the radius 0.0425 m that the controller assumes, so the multiplier is only an error here. You do not change that file.
+`odom` matches the world. The robot starts at the origin of the world, facing +x, and the
+distance driven in `odom` equals Gazebo's true travel (a 3 m test with `cmd_vel`: 2.93 m in
+`odom`, 2.93 m true). The two wheel radius multipliers in
+`rosbot_controller/config/rosbot/controllers.yaml` are 1.0 in this simulation (Husarion's file
+has 0.95, a value measured on the real robot); `rosbot_sim/README.md` lists the change.
 
 ## System packages to install
 

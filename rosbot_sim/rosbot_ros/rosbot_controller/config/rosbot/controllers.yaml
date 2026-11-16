@@ -31,8 +31,8 @@
       wheel_separation: 0.186
       wheel_radius: 0.0425
       wheel_separation_multiplier: 1.36 # ICR coefficient isn't totally accurate and this coefficient can differ for various ground types
-      left_wheel_radius_multiplier: 0.95  # Based on real measurements
-      right_wheel_radius_multiplier: 0.95 # Based on real measurements
+      left_wheel_radius_multiplier: 1.0  # ENPM702: 0.95 in the Husarion file (real robot); 1.0 in the simulation, whose wheel has the radius above
+      right_wheel_radius_multiplier: 1.0 # ENPM702: 0.95 in the Husarion file (real robot); 1.0 in the simulation, whose wheel has the radius above
       odom_frame_id: odom
       base_frame_id: base_link
       pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
