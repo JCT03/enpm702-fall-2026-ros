@@ -34,7 +34,7 @@ include_directories(include)
 add_executable(robotaxi_exe src/robotaxi_main.cpp src/robotaxi_node.cpp)
 # add_executable(robotaxi_exe src/robotaxi_main.cpp)
 # Links robotaxi_exe to the ROS packages it uses.
-ament_target_dependencies(robotaxi_exe rclcpp geometry_msgs)
+ament_target_dependencies(robotaxi_exe rclcpp geometry_msgs std_msgs)
 
 
 # Copies robotaxi_exe to install/robotaxi_demo/lib/robotaxi_demo, where ros2 run looks for it.
@@ -47,6 +47,11 @@ ament_target_dependencies(dispatcher_exe rclcpp geometry_msgs)
 
 # # Copies dispatcher_exe to install/robotaxi_demo/lib/robotaxi_demo, where ros2 run looks for it.
 install(TARGETS dispatcher_exe
+  DESTINATION lib/${PROJECT_NAME})
+
+add_executable(battery_monitor_exe src/battery_monitor_main.cpp src/battery_monitor_node.cpp)
+ament_target_dependencies(battery_monitor_exe rclcpp std_msgs)
+install(TARGETS battery_monitor_exe
   DESTINATION lib/${PROJECT_NAME})
 
 # Finishes the package (exports it so other packages can find it). It must be the last line.
