@@ -31,8 +31,8 @@ find_package(geometry_msgs REQUIRED) # the message type geometry_msgs/msg/Point
 include_directories(include)
 
 # The publisher: builds the executable robotaxi_exe from its main and its node class.
-# add_executable(robotaxi_exe src/robotaxi_main.cpp src/robotaxi_node.cpp)
-add_executable(robotaxi_exe src/robotaxi_main.cpp)
+add_executable(robotaxi_exe src/robotaxi_main.cpp src/robotaxi_node.cpp)
+# add_executable(robotaxi_exe src/robotaxi_main.cpp)
 # Links robotaxi_exe to the ROS packages it uses.
 ament_target_dependencies(robotaxi_exe rclcpp geometry_msgs)
 
