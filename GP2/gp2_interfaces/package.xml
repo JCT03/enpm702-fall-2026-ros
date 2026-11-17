@@ -3,7 +3,7 @@
 <package format="3">
   <name>gp2_interfaces</name>
   <version>0.0.0</version>
-  <description>Interfaces of GP2 Patrol and Inspect in Gazebo: messages, a service and the GoToCheckpoint action.</description>
+  <description>Interfaces of GP2 Patrol and Inspect in Gazebo: messages.</description>
   <!-- TODO: replace these three lines with each team member's name and email. -->
   <maintainer email="member1@umd.edu">TODO Member 1</maintainer>
   <maintainer email="member2@umd.edu">TODO Member 2</maintainer>

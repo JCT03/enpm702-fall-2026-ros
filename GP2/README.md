@@ -9,12 +9,10 @@ and where your team starts.
 ```text
 GP2/
 ├── README.md                     this file
-├── gp2_interfaces/               messages, a service and an action (CMake)
+├── gp2_interfaces/               messages (CMake)
 │   ├── CMakeLists.txt            complete, with TODO marks
 │   ├── package.xml               complete, with TODO marks
-│   ├── msg/.gitkeep              your three message files go in msg/
-│   ├── srv/.gitkeep              GetReport.srv goes in srv/
-│   └── action/.gitkeep           GoToCheckpoint.action goes in action/
+│   └── msg/.gitkeep              your seven message files go in msg/
 └── gp2_patrol/                   C++ nodes (rclcpp)
     ├── CMakeLists.txt            complete, with TODO marks
     ├── package.xml               complete, with TODO marks
@@ -59,18 +57,18 @@ Search for `TODO` in the two `CMakeLists.txt` and the two `package.xml`.
 
 1. **Maintainers (both `package.xml`).** Replace the three placeholder
    `<maintainer>` lines with each team member's name and email.
-2. **R1: interfaces (`gp2_interfaces`).** Write the five interface files.
+2. **R1: interfaces (`gp2_interfaces`).** Write the seven message files.
    In `gp2_interfaces/CMakeLists.txt`, uncomment the line of each file in
    `GP2_INTERFACE_FILES` as you add it. Check each one with
    `ros2 interface show`, for example
-   `ros2 interface show gp2_interfaces/action/GoToCheckpoint`.
+   `ros2 interface show gp2_interfaces/msg/CheckpointGoal`.
 3. **Use the interfaces (`gp2_patrol/CMakeLists.txt`).** Once R1 builds,
    uncomment `find_package(gp2_interfaces REQUIRED)`.
 4. **R2: parameters.** Write `params_stand_in.yaml` and
    `params_gazebo.yaml` in `config/`.
-5. **R3: services and operator.** Write `patrol_services_node` and
+5. **R3: patrol status and operator.** Write `patrol_status_node` and
    `operator_node` with their `main` files. Uncomment
-   `patrol_services_exe` and `operator_exe`.
+   `patrol_status_exe` and `operator_exe`.
 6. **R4 and R5: controller.** Write `controller_node` and its `main`
    file. Uncomment `controller_exe`.
 7. **R6: mission.** Copy `patrol_log_node` from GP1, write

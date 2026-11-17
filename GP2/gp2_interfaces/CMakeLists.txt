@@ -18,8 +18,10 @@ set(GP2_INTERFACE_FILES
   # "msg/DetectedObject.msg"
   # "msg/InspectionReport.msg"
   # "msg/PatrolStatus.msg"
-  # "srv/GetReport.srv"
-  # "action/GoToCheckpoint.action"
+  # "msg/PatrolCommand.msg"
+  # "msg/CheckpointGoal.msg"
+  # "msg/CheckpointFeedback.msg"
+  # "msg/CheckpointResult.msg"
 )
 
 # Generates C++ and Python code for each interface file.

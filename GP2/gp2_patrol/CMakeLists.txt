@@ -17,11 +17,10 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rclcpp_action REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(std_srvs REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(ros_gz_interfaces REQUIRED)
@@ -30,26 +29,26 @@ find_package(ros_gz_interfaces REQUIRED)
 
 include_directories(include)
 
-# TODO (R3): needs patrol_services_main.cpp and patrol_services_node.cpp.
-# add_executable(patrol_services_exe src/patrol_services_main.cpp
-#   src/patrol_services_node.cpp)
-# ament_target_dependencies(patrol_services_exe rclcpp std_srvs gp2_interfaces)
+# TODO (R3): needs patrol_status_main.cpp and patrol_status_node.cpp.
+# add_executable(patrol_status_exe src/patrol_status_main.cpp
+#   src/patrol_status_node.cpp)
+# ament_target_dependencies(patrol_status_exe rclcpp gp2_interfaces)
 
 # TODO (R3): needs operator_main.cpp and operator_node.cpp.
 # add_executable(operator_exe src/operator_main.cpp src/operator_node.cpp)
-# ament_target_dependencies(operator_exe rclcpp std_srvs gp2_interfaces)
+# ament_target_dependencies(operator_exe rclcpp gp2_interfaces)
 
 # TODO (R4): needs controller_main.cpp and controller_node.cpp.
 # add_executable(controller_exe src/controller_main.cpp src/controller_node.cpp)
-# ament_target_dependencies(controller_exe rclcpp rclcpp_action geometry_msgs
-#   nav_msgs sensor_msgs gp2_interfaces)
+# ament_target_dependencies(controller_exe rclcpp geometry_msgs nav_msgs
+#   sensor_msgs std_msgs gp2_interfaces)
 
 # TODO (R6): needs mission_main.cpp, mission_node.cpp and patrol_log_node.cpp.
 # R10 adds the camera: tf2_ros, tf2_geometry_msgs and ros_gz_interfaces.
 # add_executable(mission_exe src/mission_main.cpp src/mission_node.cpp
 #   src/patrol_log_node.cpp)
-# ament_target_dependencies(mission_exe rclcpp rclcpp_action geometry_msgs
-#   sensor_msgs tf2_ros tf2_geometry_msgs ros_gz_interfaces gp2_interfaces)
+# ament_target_dependencies(mission_exe rclcpp geometry_msgs sensor_msgs std_msgs
+#   tf2_ros tf2_geometry_msgs ros_gz_interfaces gp2_interfaces)
 
 # TODO (R7): needs checkpoint_frames_main.cpp and checkpoint_frames_node.cpp.
 # add_executable(checkpoint_frames_exe src/checkpoint_frames_main.cpp
@@ -57,7 +56,7 @@ include_directories(include)
 # ament_target_dependencies(checkpoint_frames_exe rclcpp geometry_msgs tf2_ros)
 
 # TODO (R3 to R7): uncomment, and delete the executables you have not written yet.
-# install(TARGETS patrol_services_exe operator_exe controller_exe mission_exe
+# install(TARGETS patrol_status_exe operator_exe controller_exe mission_exe
 #   checkpoint_frames_exe
 #   DESTINATION lib/${PROJECT_NAME})
 
