@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!-- A front-facing Gazebo logical camera for the ROSbot, spawned next to it by
+     gp2_sim.launch.py. The rig link sits where the robot base_link is (on the floor, under its center), and the
+     DetachableJoint plugin joins that link to the robot's base_link with a fixed joint,
+     so the camera moves with the robot. The camera frame is logical_camera_link, 0.12 m
+     ahead of and 0.20 m above base_link (the launch file publishes this offset to TF). -->
+<sdf version="1.8">
+  <model name="logical_camera_rig">
+    <link name="link">
+      <inertial>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <sensor name="logical_camera" type="logical_camera">
+        <pose>0.12 0 0.20 0 0 0</pose>
+        <logical_camera>
+          <near>0.3</near>
+          <far>3.5</far>
+          <horizontal_fov>2.0</horizontal_fov>
+          <aspect_ratio>1.0</aspect_ratio>
+        </logical_camera>
+        <always_on>1</always_on>
+        <update_rate>10</update_rate>
+        <visualize>false</visualize>
+        <topic>logical_camera</topic>
+        <gz_frame_id>logical_camera_link</gz_frame_id>
+      </sensor>
+    </link>
+
+    <plugin filename="gz-sim-detachable-joint-system"
+            name="gz::sim::systems::DetachableJoint">
+      <parent_link>link</parent_link>
+      <child_model>rosbot</child_model>
+      <child_link>base_link</child_link>
+    </plugin>
+  </model>
+</sdf>

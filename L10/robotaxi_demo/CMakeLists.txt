@@ -42,12 +42,12 @@ install(TARGETS robotaxi_exe
   DESTINATION lib/${PROJECT_NAME})
 
 # The subscriber: builds the executable dispatcher_exe the same way.
-# add_executable(dispatcher_exe src/dispatcher_main.cpp src/dispatcher_node.cpp)
-# ament_target_dependencies(dispatcher_exe rclcpp geometry_msgs)
+add_executable(dispatcher_exe src/dispatcher_main.cpp src/dispatcher_node.cpp)
+ament_target_dependencies(dispatcher_exe rclcpp geometry_msgs)
 
 # # Copies dispatcher_exe to install/robotaxi_demo/lib/robotaxi_demo, where ros2 run looks for it.
-# install(TARGETS dispatcher_exe
-#   DESTINATION lib/${PROJECT_NAME})
+install(TARGETS dispatcher_exe
+  DESTINATION lib/${PROJECT_NAME})
 
 # Finishes the package (exports it so other packages can find it). It must be the last line.
 ament_package()
